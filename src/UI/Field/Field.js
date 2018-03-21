@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
-import { flatten } from 'lodash'
 
 class Field extends PureComponent {
   static defaultProps = {
-    cells: [],
+    matrix: [[]],
   }
   render() {
     const { cells } = this.props
@@ -18,6 +17,7 @@ class Field extends PureComponent {
               <BackgroundCell key={i} />
           )}
         </Background>
+
         <Playground>
           {cells.map(({ x, y, value, id }) => (
             <Cell key={id} x={x} y={y} value={value}>
