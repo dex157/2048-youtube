@@ -39,9 +39,7 @@ const moveCells = (initCells, direction) => {
     }
   }
 
-  cells
-  .filter(cell => cell.by != null)
-  .forEach(cell => {
+  cells.filter(cell => cell.by != null).forEach(cell => {
     cell.x = cell.by.x
     cell.y = cell.by.y
     delete cell.by
@@ -61,9 +59,11 @@ function moveCell(matrix, x, y) {
       matrix[currentRow][x] = 0
 
       currentRow = nextRow
-
-    } else if (matrix[nextRow][x].value === matrix[currentRow][x].value) {
-
+    } else if (
+      matrix[nextRow][x].value === matrix[currentRow][x].value &&
+      (matrix[nextRow][x].state === cellStates.IDLE ||
+        matrix[nextRow][x].state === cellStates.MOVING)
+    ) {
       matrix[nextRow][x].state = cellStates.DYING
       matrix[nextRow][x].by = matrix[currentRow][x]
       matrix[currentRow][x].state = cellStates.INCREASE
