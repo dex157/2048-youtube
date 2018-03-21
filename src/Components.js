@@ -3,7 +3,6 @@ import Layout from 'UI/Layout'
 import Field from 'UI/Field'
 
 class Components extends PureComponent {
-  state = {}
   render() {
     return (
       <Layout>
