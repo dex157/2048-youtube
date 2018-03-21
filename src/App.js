@@ -23,6 +23,18 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.handleKeyPress)
+  }
+
+  handleKeyPress = (event) => {
+
+  }
+
   render() {
     const { cells, score } = this.state
 
