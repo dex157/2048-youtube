@@ -4,12 +4,16 @@ import Field from 'UI/Field'
 import ControllPanel from 'UI/ControllPanel'
 import Button from 'UI/Button'
 import Score from 'UI/Score'
-import { initCells } from 'logic'
+import { moveCells, directions, initCells } from 'logic'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = this.getNewState()
+  state = this.getNewState()
+
+  mapKeyCodeToDirection = {
+    KeyA: directions.LEFT,
+    KeyS: directions.DOWN,
+    KeyD: directions.RIGHT,
+    KeyW: directions.UP,
   }
 
   newGame = () => {
@@ -31,8 +35,12 @@ class App extends Component {
     document.removeEventListener('keypress', this.handleKeyPress)
   }
 
-  handleKeyPress = (event) => {
-
+  handleKeyPress = event => {
+    if (['KeyA', 'KeyS', 'KeyD', 'KeyW'].includes(event.code))
+      this.setState(state => ({
+        ...state,
+        cells: moveCells(state.cells, this.mapKeyCodeToDirection[event.code]),
+      }))
   }
 
   render() {
