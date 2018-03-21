@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Layout from 'UI/Layout'
 import Field from 'UI/Field'
+import ControllPanel from 'UI/ControllPanel'
+import Button from 'UI/Button'
+import Score from 'UI/Score'
 import { getInitCells } from 'logic'
 
 class App extends Component {
@@ -20,12 +23,13 @@ class App extends Component {
     this.setState(this.getInitState())
   }
   render() {
-    const { cells } = this.state
+    const { cells, score } = this.state
     return (
       <Layout>
-        <div>
-          <button onClick={this.startNewGame}>New game</button>
-        </div>
+        <ControllPanel>
+          <Button onClick={this.startNewGame}>New game</Button>
+          <Score>{score}</Score>
+        </ControllPanel>
         <Field cells={cells} />
       </Layout>
     )
