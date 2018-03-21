@@ -76,6 +76,8 @@ function moveCell(matrix, x, y) {
         matrix[nextRow][y] = matrix[currentRow][y]
         matrix[currentRow][y] = 0
       }
+    } else {
+      break;
     }
     nextRow -= 1
   }

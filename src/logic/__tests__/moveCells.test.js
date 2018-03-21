@@ -68,3 +68,14 @@ describe('MOVE UP', () => {
     ])
   })
 })
+describe('MOVE ROW', () => {
+  it('move one cell on 1 step', () => {
+    const cells = [create(0, 1, 2, 'test1'), create(1, 1, 4, 'test2'), create(2, 1, 2, 'test3')]
+    expect(moveCells(cells, direction.UP)).toEqual([
+      { id: 'test1', x: 0, y: 1, state: cellStates.IDLE, value: 2 },
+      { id: 'test2', x: 1, y: 1, state: cellStates.IDLE, value: 4 },
+      { id: 'test3', x: 2, y: 1, state: cellStates.IDLE, value: 2 },
+    ])
+  })
+
+})
