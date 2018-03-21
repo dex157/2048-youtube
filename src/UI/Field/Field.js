@@ -63,11 +63,13 @@ const BackgroundCell = styled.div`
 `
 
 const Cell = BackgroundCell.extend`
+
   transform: translate(${({ x }) => x * 110}px, ${({ y }) => y * 110}px);
   text-align: center;
   line-height: 100px;
   background-color: ${({ value }) => calculateBackgroundColor(value)};
   position: absolute;
+
   transition-property: transform;
   transition: 100ms ease-in-out;
   color: #6a4e4e;
