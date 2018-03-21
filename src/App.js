@@ -12,16 +12,38 @@ class App extends Component {
     this.state = this.getInitState()
   }
 
-  getInitState() {
-    return {
-      cells: getInitCells(),
-      score: 0,
-    }
-  }
+  getInitState = () => ({
+    cells: getInitCells(),
+    score: 0,
+  })
 
   startNewGame = () => {
     this.setState(this.getInitState())
   }
+
+  componentDidMount() {
+    document.addEventListener('keypress', this.handleKeyPress)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keypress', this.handleKeyPress)
+  }
+
+  handleKeyPress = event => {
+    switch (event.code) {
+      case 'keyA':
+        break
+      case 'keyS':
+        break
+      case 'keyD':
+        break
+      case 'keyW':
+        break
+      default:
+        break
+    }
+  }
+
   render() {
     const { cells, score } = this.state
     return (
