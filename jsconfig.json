@@ -1,0 +1,33 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "baseUrl": ".",
+    "checkJs": false,
+    "jsx": "react",
+    "lib": [
+      "dom",
+      "es7"
+    ],
+    "module": "commonjs",
+    "newLine": "LF",
+    "paths": {
+      "UI/*": [
+        ".src/UI/*"
+      ],
+    },
+    "pretty": true,
+    "rootDir": "./src",
+    "strict": true,
+    "target": "esnext",
+    "watch": true
+  },
+  "include": [
+    "./src/*"
+  ],
+  "typeAcquisition": {
+    "include": [
+      "react"
+    ]
+  },
+}
