@@ -42,11 +42,19 @@ export const moveCells = (initCells, moveDirection) => {
     }
   }
 
+  cells.filter(cell => cell.state === cellStates.DYING).forEach(cell => {
+    const killer = cell.by
+    cell.x = killer.x
+    cell.y = killer.y
+    delete cell.by
+  })
+
   // printMatrix(startMatrix)
   return cells
 }
 
 function moveCell(matrix, x, y) {
+  let currentCell = matrix[x][y]
   let nextRow = x - 1
   let currentRow = x
   // printMatrix(matrix)
@@ -63,6 +71,7 @@ function moveCell(matrix, x, y) {
         matrix[nextRow][y].state === cellStates.MOVING
       ) {
         matrix[nextRow][y].state = cellStates.DYING
+        matrix[nextRow][y].by = currentCell
         matrix[currentRow][y].state = cellStates.INCREASE
         matrix[nextRow][y] = matrix[currentRow][y]
         matrix[currentRow][y] = 0

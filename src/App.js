@@ -4,7 +4,13 @@ import Field from 'UI/Field'
 import ControllPanel from 'UI/ControllPanel'
 import Button from 'UI/Button'
 import Score from 'UI/Score'
-import { getInitCells, direction, moveCells } from 'logic'
+import {
+  increaseAndRemoveCells,
+  getInitCells,
+  direction,
+  moveCells,
+  populateCells,
+} from 'logic'
 
 const gameStates = {
   IDLE: 'IDLE',
@@ -43,17 +49,33 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.gameState !== this.state.gameState && this.state.gameState === gameStates.PROCESSING) {
+    if (
+      prevState.gameState !== this.state.gameState &&
+      this.state.gameState === gameStates.PROCESSING
+    ) {
       this.processGame()
     }
   }
 
   async processGame() {
     console.log('processGame')
-    const { cells, moveDirection } = this.state
-    const newCells = moveCells(cells, moveDirection)
-    this.setState(state => ({ ...state, cells: newCells }))
-    await delay(100)
+
+    this.setState(state => ({
+      ...state,
+      cells: moveCells(state.cells, state.moveDirection),
+    }))
+    await delay(150)
+
+    this.setState(state => ({
+      ...state,
+      ...increaseAndRemoveCells(state.cells, state.score),
+    }))
+
+    this.setState(state => ({
+      ...state,
+      cells: [...state.cells, ...populateCells(state.cells)],
+    }))
+
     this.setState(state => ({
       ...state,
       gameState: gameStates.IDLE,
